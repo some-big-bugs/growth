@@ -33,3 +33,31 @@
 10. 为什么要使用阻塞队列？
 11. 什么时候使用有界对列？什么时候使用无界队列？
 12. 首次公开：通过腾讯一道面试题理解大厂面试多线程代码题的要求
+
+
+
+-----------------
+1.SOA、Webservice、Dubbo、SpringCloud究竟什么是微服务？
+2.单体应用向微服务异构平台架构演变
+3. SpringCloud微服务组件生态体系
+1）SpringCloud Netflix
+2）•SpringCloud Alibaba
+4. 从零开始构建微服务项目各组件应用场景及代码实现
+1）Eureka 微服务注册与发现
+2）Actuator 微服务监控
+3）RestTemplate 服务器远程调用
+4）Ribbon 客户端的负载均衡
+5）OpenFeign 声明式服务调用
+6）Hystrix 微服务熔断、降级、资源隔离
+7）HystrixDashboard
+8）Zuul 微服务网关
+9）Config 微服务配置中心
+10）Sleuth zipkin 微服务链路追踪
+5. 常用中间件服务核心解密与技术选型
+1）分布式文件存储中间件 FastDFS
+2）分布式消息中间件 RocketMQ Kafka RabbitMQ ActiveMQ
+3）分布式搜索中间件ElasticSearch
+4）分布式缓存中间件 Redis
+5）高并发高性能接入层中间件 LVS、Keepalived、Nginx、Haproxy
+
+------------------

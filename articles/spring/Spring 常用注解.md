@@ -2,18 +2,7 @@
 
 # Spring 系列注解
 
-- [Spring 系列注解](#spring-系列注解)
-- [Spring](#spring)
-  - [Bean 声明和注入](#bean-声明和注入)
-  - [配置相关](#配置相关)
-  - [切面（AOP）](#切面aop)
-  - [@Bean的属性支持](#bean的属性支持)
-  - [环境切换](#环境切换)
-  - [异步相关](#异步相关)
-  - [定时任务相关](#定时任务相关)
-  - [@Enable*注解说明](#enable注解说明)
-  - [测试相关注解](#测试相关注解)
-- [Spring MVC](#spring-mvc)
+[TOC]
 
 # Spring
 
@@ -130,3 +119,252 @@
 - @ExceptionHandler 用于全局处理控制器里的异常
 - @InitBinder 用来设置WebDataBinder，WebDataBinder用来自动绑定前台请求参数到Model中。
 - @ModelAttribute 本来的作用是绑定键值对到Model里，在@ControllerAdvice中是让全局的- @RequestMapping都能获得在此处设置的键值对。
+
+
+
+## 注解及介绍
+
+### 1、@SpringBootApplication
+
+这是 Spring Boot 最最最核心的注解，用在 Spring Boot 主类上，标识这是一个 Spring Boot 应用，用来开启 Spring Boot 的各项能力。
+
+其实这个注解就是 `@SpringBootConfiguration、@EnableAutoConfiguration、@ComponentScan` 这三个注解的组合，也可以用这三个注解来代替 @SpringBootApplication 注解。@SpringBootApplication 默认扫描和本类在一个层级下的所有包及其子包
+
+### 2、@EnableAutoConfiguration
+
+允许 Spring Boot 自动配置注解，开启这个注解之后，Spring Boot 就能根据当前类路径下的包或者类来配置 Spring Bean。
+
+如：当前类路径下有 Mybatis 这个 JAR 包，MybatisAutoConfiguration 注解就能根据相关参数来配置 Mybatis 的各个 Spring Bean。
+
+### 3、@Configuration
+
+这是 Spring 3.0 添加的一个注解，用来代替 applicationContext.xml 配置文件，所有这个配置文件里面能做到的事情都可以通过这个注解所在类来进行注册。替代了xml形式的配置文件，用配置类开发
+
+### 4、@SpringBootConfiguration
+
+这个注解就是 @Configuration 注解的变体，只是用来修饰是 Spring Boot 配置而已，或者可利于 Spring Boot 后续的扩展。
+
+### 5、@ComponentScan
+
+这是 Spring 3.1 添加的一个注解，用来代替配置文件中的 component-scan 配置，开启组件扫描，即自动扫描包路径下的 @Component 注解进行注册 bean 实例到 context 中。
+
+### 6、@Conditional
+
+这是 Spring 4.0 添加的新注解，用来标识一个 Spring Bean 或者 Configuration 配置文件，当满足指定的条件才开启配置。
+
+### 7、@ConditionalOnBean
+
+组合 @Conditional 注解，当容器中有指定的 Bean 才开启配置。
+
+### 8、@ConditionalOnMissingBean
+
+组合 @Conditional 注解，和 @ConditionalOnBean 注解相反，当容器中没有指定的 Bean 才开启配置。
+
+### 9、@ConditionalOnClass
+
+组合 @Conditional 注解，当容器中有指定的 Class 才开启配置。
+
+### 10、@ConditionalOnMissingClass
+
+组合 @Conditional 注解，和 @ConditionalOnMissingClass 注解相反，当容器中没有指定的 Class 才开启配置。
+
+### 11、@ConditionalOnWebApplication
+
+组合 @Conditional 注解，当前项目类型是 WEB 项目才开启配置。
+
+当前项目有以下 3 种类型。
+
+```
+enum Type {
+/**
+ * 匹配全部web application
+ */
+ANY,
+
+/**
+ *只匹配servlet web applicaiton
+ */
+SERVLET,
+
+/**
+ * 只匹配reactice-based web application
+ */
+REACTIVE
+}
+```
+
+### 12、@ConditionalOnNotWebApplication
+
+组合 @Conditional 注解，和 @ ConditionalOnWebApplication 注解相反，当前项目类型不是 WEB 项目才开启配置。
+
+### 13、@ConditionalOnProperty
+
+组合 @Conditional 注解，当指定的属性有指定的值时才开启配置。
+
+### 14、@ConditionalOnExpression
+
+组合 @Conditional 注解，当 SpEL 表达式为 true 时才开启配置。
+
+### 15、@ConditionalOnJava
+
+组合 @Conditional 注解，当运行的 Java JVM 在指定的版本范围时才开启配置。
+
+### 16、@ConditionalOnResource
+
+组合 @Conditional 注解，当类路径下有指定的资源才开启配置。
+
+### 17、@ConditionalOnJndi
+
+组合 @Conditional 注解，当指定的 JNDI 存在时才开启配置。JDNI（Java 命名与目录接口 Java Naming and Directory Interface）
+
+### 18、@ConditionalOnCloudPlatform
+
+组合 @Conditional 注解，当指定的云平台激活时才开启配置。
+
+### 19、@ConditionalOnSingleCandidate
+
+组合 @Conditional 注解，当指定的 class 在容器中只有一个 Bean，或者同时有多个但为首选时才开启配置。
+
+### 20、@ConfigurationProperties
+
+用来加载额外的配置（如 .properties 文件），可用在 @Configuration 注解类，或者 @Bean 注解方法上面。
+
+### 21、@EnableConfigurationProperties
+
+一般要配合 @ConfigurationProperties 注解使用，用来开启对 @ConfigurationProperties 注解配置 Bean 的支持。
+
+### 22、@AutoConfigureAfter
+
+用在自动配置类上面，表示该自动配置类需要在另外指定的自动配置类配置完之后。
+
+如 Mybatis 的自动配置类，需要在数据源自动配置类之后。
+
+```
+@AutoConfigureAfter(DataSourceAutoConfiguration.class)
+public class MybatisAutoConfiguration {
+}
+```
+
+### 23、@AutoConfigureBefore
+
+这个和 @AutoConfigureAfter 注解使用相反，表示该自动配置类需要在另外指定的自动配置类配置之前。
+
+### 24、@Import
+
+这是 Spring 3.0 添加的新注解，用来导入一个或者多个 @Configuration 注解修饰的类，这在 Spring Boot 里面应用很多。
+
+### 25、@ImportResource
+
+这是 Spring 3.0 添加的新注解，用来导入一个或者多个 Spring 配置文件，这对 Spring Boot 兼容老项目非常有用，因为有些配置无法通过 Java Config 的形式来配置就只能用这个注解来导入。
+
+## 读取配置方式汇总
+
+### 1.读取application文件
+
+在application.yml或者properties文件中添加:
+
+```
+user.name = 狼王
+user.age = 25
+user.sex = man 
+@value 方式
+@Component
+public class User {
+
+    @Value("${user.name}")
+    private String name;
+    @Value("${user.age}")
+    private int age;
+    @Value("${user.sex}")
+    private boolean sex;
+
+    public User() {
+    }
+
+    public User(String name, int age, boolean man) {
+        this.name = name;
+        this.age = age;
+        this.man = man;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isMan() {
+        return man;
+    }
+
+    public void setMan(boolean man) {
+        this.man = man;
+    }
+}
+```
+
+### 2.@ConfigurationProperties注解读取方式
+
+```
+@Component
+@ConfigurationProperties(prefix = "user")
+public class User2 {
+    private String name;
+
+    private int age;
+
+    private boolean sex;
+
+    public User2() {
+    }
+
+    public User2(String name, int age, boolean man)     {
+        this.name = name;
+        this.age = age;
+        this.man = man;
+    }
+}
+```
+
+## 3.读取指定文件
+
+资源目录下建立config/myConfig.properties:
+
+```
+db.username=root
+db.password=123
+```
+
+### @PropertySource+@Value注解读取方式
+
+```
+@Component
+@PropertySource(value = {"config/myConfig.properties"})
+public class User2 {
+
+    @Value("${db.userName}")
+    private String userName;
+    @Value("${db.userName}")
+    private String passWord;
+
+    public User2() {
+    }
+
+    public User2(String userName,String passWord){
+        this.userName = userName;
+        this.passWord = passWord;
+    }
+}
+```
+
+也可以通过`@PropertySource+@ConfigurationProperties`注解读取方式
