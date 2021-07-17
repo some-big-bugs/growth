@@ -1,23 +1,6 @@
-<h1> Growth </h1>
+# Growth
 
-成长文档
-
----
-
-- [文章列表](#文章列表)
-    - [Java](#java)
-    - [Python](#python)
-    - [Go](#go)
-    - [Linux](#linux)
-    - [MySQL](#mysql)
-    - [Redis](#redis)
-    - [分布式](#分布式)
-    - [其他](#其他)
-- [性能优化](#性能优化)
-- [互联网资源 Digital Library](#互联网资源-digital-library)
-- [参考表](#参考表)
-- [读书笔记](#读书笔记)
-- [自传](#自传)
+记录一些学习和工作中的问题
 
 ---
 
@@ -107,19 +90,6 @@
 - [读书笔记 | 经济学原理：机会成本、比较优势、贸易互助](./读书笔记/经济学原理：机会成本、比较优势、贸易互助.md)
 - [心理学：约拿情结（Jonas-Komplex）人不怕出名，但猪肯定怕壮](./读书笔记/心理学：约拿情结.md)
 
-# 自传
-
-- [自传](./autobiography/README.md)
-- [第一夜 总纲](./autobiography/第一夜%20总纲.md)
-- [第二夜 编程伊始](./autobiography/第二夜%20编程伊始.md)
-- [第三夜 十二信徒](./autobiography/第三夜%20十二信徒.md)
-- [第四夜 初入峰鸟](./autobiography/第四夜%20初入峰鸟.md)
-- [第五夜 996 的大学生活](./autobiography/第五夜%20996的邯郸学院.md)
-- [第六夜 大学前夕 黎明前的午夜](./autobiography/第六夜%20大学前夕.md)
-- [第七夜 连标题都是谎言](./autobiography/第七夜%20连标题都是谎言.md)
-- [第八夜 第一桶金](./autobiography/第八夜%20第一桶金.md)
-- [第九夜 我的信条](./autobiography/第九夜%20我的信条.md)
-
 ---
 
 ![白色兔子公众号图片](./articles/red.jpg)
@@ -135,5 +105,4 @@
 
 [1] 曼昆等. 经济学原理:微观经济学分册. 北京大学出版社, 2012.
 [2] 腾讯.代码安全指南[DB/OL] https://github.com/Tencent/secguide
-
 
